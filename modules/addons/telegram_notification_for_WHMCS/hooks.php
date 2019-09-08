@@ -11,7 +11,6 @@ $GLOBALS['telegram_date'] = date("d-m-Y H:i:s");
 
 #$GLOBALS['telegram_chat'] = "-283356249";
 
-
 $GLOBALS['telegram_url'] = "https://comunica.itfinden.com/commands/process";
 // Your Discord WebHook URL.
 // Note: Please be aware that the channel that you select when creating the web hook will be where the messages are sent.

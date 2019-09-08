@@ -16,7 +16,6 @@ function telegram_notification_for_whmcs_config() {
     return $configarray;
 }
 
-
 function telegram_notification_for_whmcs_activate() {
     $query = "CREATE TABLE IF NOT EXISTS `ITNW` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
