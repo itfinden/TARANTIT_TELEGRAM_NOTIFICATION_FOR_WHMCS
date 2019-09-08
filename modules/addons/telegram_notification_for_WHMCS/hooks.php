@@ -572,4 +572,4 @@ function simpleFix($value){
 	return $value;
 }
 
-?>
+
