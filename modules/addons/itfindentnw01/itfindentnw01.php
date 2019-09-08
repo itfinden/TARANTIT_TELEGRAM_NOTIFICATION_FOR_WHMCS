@@ -1,7 +1,7 @@
 <?php
 if (!defined("WHMCS"))
 	die("This file cannot be accessed directly");
-function wt_note_config() {
+function itfindentnw01_config() {
 	$configarray = array(
 	"name" => "Itfinden Telegram Notifique Whmcs",
 	"description" => "Notifique al administrador y a los patrocinadores del sitio a través de telegram - Diseñado y codificado por Milad Livestock",
@@ -14,7 +14,7 @@ function wt_note_config() {
 	));
 	return $configarray;
 }
-function wt_note_activate() {
+function itfindentnw01_activate() {
 	$query = "CREATE TABLE IF NOT EXISTS `db_itfindentnw01` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`adminid` int(11) NOT NULL,
@@ -24,11 +24,11 @@ function wt_note_activate() {
 	) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;";
 	$result = mysql_query($query);
 }
-function wt_note_deactivate() {
+function itfindentnw01_deactivate() {
 	$query = "DROP TABLE `db_itfindentnw01`";
 	$result = mysql_query($query);
 }
-function wt_note_output($vars) {
+function itfindentnw01_output($vars) {
 	global $customadminpath, $CONFIG;
 	$access_token = select_query('db_itfindentnw01', '', array('adminid' => $_SESSION['adminid']));
 	if ( $_GET['return'] == '1' && $_SESSION['request_token'] ) {
