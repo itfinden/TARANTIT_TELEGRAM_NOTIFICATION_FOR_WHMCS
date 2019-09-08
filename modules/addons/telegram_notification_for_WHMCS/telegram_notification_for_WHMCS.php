@@ -1,7 +1,7 @@
 <?php
 
 ////////////////////////// Configuration Area //////////////////////////
-// Configure the below variables to allow the script to work correct and connect to both your WHMCS install and Discord channel.
+// Configure the below variables to allow the script to work correct and connect to both your WHMCS install and Telegram Bot.
 // date(DateTime::ISO8601)
 $GLOBALS['telegram_bot'] = "364508222:AAH4U4SRhuhk2bKJSlznSwIfAEPQtrVXAH0";
 $GLOBALS['telegram_chat'] = "-360580051";
