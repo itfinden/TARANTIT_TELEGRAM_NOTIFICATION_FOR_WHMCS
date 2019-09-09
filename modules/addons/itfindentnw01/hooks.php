@@ -1,8 +1,73 @@
 <?php
 
+function itfinden_log($log_msg)
+{
+    $log_filename = getcwd()."/itfinden_log/";
+    if (!file_exists($log_filename)) 
+    {
+        // create directory/folder uploads.
+        mkdir($log_filename, 0777, true);
+    }
+    
+    $log_file_data = $log_filename.'log_' . date('d-M-Y') . '.log';
+    // if you don't add `FILE_APPEND`, the file will be erased each time you add a log
+    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
+}
+function itfinden_dump($log_msg)
+{
+    $log_filename = getcwd()."/itfinden_dump/";
+    
+    $log_msg=var_export($log_msg,TRUE) 
+	
+    if (!file_exists($log_filename)) 
+    {
+        // create directory/folder uploads.
+        mkdir($log_filename, 0777, true);
+    }
+    
+    $log_file_data = $log_filename.'dump_' . date('d-M-Y') . '.log';
+    // if you don't add `FILE_APPEND`, the file will be erased each time you add a log
+    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
+}
+
+
+function sendTelegramMessage($pm) {
+	global $vars;
+	$application_chatid = mysql_fetch_array( select_query('tbladdonmodules', 'value', array('module' => 'itfindentnw01', 'setting' => 'chatid') ), MYSQL_ASSOC );
+	$application_botkey = mysql_fetch_array( select_query('tbladdonmodules', 'value', array('module' => 'itfindentnw01', 'setting' => 'BotId') ), MYSQL_ASSOC );
+	$chat_id 		= $application_chatid['value'];
+	$botToken 		= $application_botkey['value'];
+	$data = array(
+		'chat_id' 	=> $chat_id,
+		'text' 		=> PHP_EOL. $pm . PHP_EOL."-------------" . PHP_EOL. base64_decode("V0hNQ1MgSXRGaW5kZW4=")
+	);
+    
+    itfinden_log($pm);
+    
+	$curl = curl_init();
+	curl_setopt($curl, CURLOPT_URL, "https://api.telegram.org/bot".$botToken."/sendMessage");
+	curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	curl_exec($curl);
+	
+	if(!curl_errno($curl))
+        {
+         $info = curl_getinfo($curl);
+         itfinden_log ('Tiempo ' . $info['total_time'] . ' URL :  ' . $info['url']);
+        }
+        
+        // Close handle
+	
+	curl_close($curl);
+}
+
+
+
 function tnw_ClientAdd($vars) {
 	global $customadminpath, $CONFIG;
-	$application_key = mysql_fetch_array(select_query('tbladdonmodules', 'value', array('module' => 'noti', 'setting' => 'key')), MYSQL_ASSOC);
+	$application_key = mysql_fetch_array(select_query('tbladdonmodules', 'value', array('module' => 'itfindentnw01', 'setting' => 'key')), MYSQL_ASSOC);
 	$administrators = full_query("SELECT `access_token` FROM `itfindentnw01` WHERE `permissions` LIKE '%new_client%'");
 	while ($administrator = mysql_fetch_array($administrators, MYSQL_ASSOC)) {
 		$tnw[] = $administrator['access_token'];
@@ -13,7 +78,7 @@ function tnw_ClientAdd($vars) {
 
 function tnw_InvoicePaid($vars) {
 	global $customadminpath, $CONFIG;
-	$application_key = mysql_fetch_array(select_query('tbladdonmodules', 'value', array('module' => 'noti', 'setting' => 'key')), MYSQL_ASSOC);
+	$application_key = mysql_fetch_array(select_query('tbladdonmodules', 'value', array('module' => 'itfindentnw01', 'setting' => 'key')), MYSQL_ASSOC);
 	$administrators = full_query("SELECT `access_token` FROM `itfindentnw01` WHERE `permissions` LIKE '%new_invoice%'");
 	while ($administrator = mysql_fetch_array($administrators, MYSQL_ASSOC)) {
 		$tnw[] = $administrator['access_token'];
@@ -24,7 +89,7 @@ function tnw_InvoicePaid($vars) {
 
 function tnw_TicketOpen($vars) {
 	global $customadminpath, $CONFIG;
-	$application_key = mysql_fetch_array(select_query('tbladdonmodules', 'value', array('module' => 'noti', 'setting' => 'key')), MYSQL_ASSOC);
+	$application_key = mysql_fetch_array(select_query('tbladdonmodules', 'value', array('module' => 'itfindentnw01', 'setting' => 'key')), MYSQL_ASSOC);
 	$administrators = full_query("SELECT `access_token` FROM `itfindentnw01` WHERE `permissions` LIKE '%new_ticket%'");
 	while ($administrator = mysql_fetch_array($administrators, MYSQL_ASSOC)) {
 		$tnw[] = $administrator['access_token'];
@@ -35,7 +100,7 @@ function tnw_TicketOpen($vars) {
 
 function tnw_TicketUserReply($vars) {
 	global $customadminpath, $CONFIG;
-	$application_key = mysql_fetch_array(select_query('tbladdonmodules', 'value', array('module' => 'noti', 'setting' => 'key')), MYSQL_ASSOC);
+	$application_key = mysql_fetch_array(select_query('tbladdonmodules', 'value', array('module' => 'itfindentnw01', 'setting' => 'key')), MYSQL_ASSOC);
 	$administrators = full_query("SELECT `access_token` FROM `itfindentnw01` WHERE `permissions` LIKE '%new_update%'");
 	while ($administrator = mysql_fetch_array($administrators, MYSQL_ASSOC)) {
 		$tnw[] = $administrator['access_token'];
