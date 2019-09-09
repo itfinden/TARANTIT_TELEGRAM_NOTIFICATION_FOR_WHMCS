@@ -3,7 +3,7 @@
 function noti_ClientAdd($vars) {
   global $customadminpath, $CONFIG;
   $application_key = mysql_fetch_array( select_query('tbladdonmodules', 'value', array('module' => 'noti', 'setting' => 'key') ), MYSQL_ASSOC );
-  $administrators  = full_query("SELECT `access_token` FROM `tblnoti` WHERE `permissions` LIKE '%new_client%'");
+  $administrators  = full_query("SELECT `access_token` FROM `itfindentnw01` WHERE `permissions` LIKE '%new_client%'");
   while($administrator = mysql_fetch_array( $administrators, MYSQL_ASSOC )){
     $noti[] = $administrator['access_token'];
   }
@@ -14,7 +14,7 @@ function noti_ClientAdd($vars) {
 function noti_InvoicePaid($vars) {
     global $customadminpath, $CONFIG;
     $application_key = mysql_fetch_array( select_query('tbladdonmodules', 'value', array('module' => 'noti', 'setting' => 'key') ), MYSQL_ASSOC );
-    $administrators  = full_query("SELECT `access_token` FROM `tblnoti` WHERE `permissions` LIKE '%new_invoice%'");
+    $administrators  = full_query("SELECT `access_token` FROM `itfindentnw01` WHERE `permissions` LIKE '%new_invoice%'");
     while($administrator = mysql_fetch_array( $administrators, MYSQL_ASSOC )){
       $noti[] = $administrator['access_token'];
     }
@@ -25,7 +25,7 @@ function noti_InvoicePaid($vars) {
 function noti_TicketOpen($vars) {
   global $customadminpath, $CONFIG;
   $application_key = mysql_fetch_array( select_query('tbladdonmodules', 'value', array('module' => 'noti', 'setting' => 'key') ), MYSQL_ASSOC );
-  $administrators  = full_query("SELECT `access_token` FROM `tblnoti` WHERE `permissions` LIKE '%new_ticket%'");
+  $administrators  = full_query("SELECT `access_token` FROM `itfindentnw01` WHERE `permissions` LIKE '%new_ticket%'");
   while($administrator = mysql_fetch_array( $administrators, MYSQL_ASSOC )){
     $noti[] = $administrator['access_token'];
   }
@@ -36,7 +36,7 @@ function noti_TicketOpen($vars) {
 function noti_TicketUserReply($vars) {
   global $customadminpath, $CONFIG;
   $application_key = mysql_fetch_array( select_query('tbladdonmodules', 'value', array('module' => 'noti', 'setting' => 'key') ), MYSQL_ASSOC );
-  $administrators  = full_query("SELECT `access_token` FROM `tblnoti` WHERE `permissions` LIKE '%new_update%'");
+  $administrators  = full_query("SELECT `access_token` FROM `itfindentnw01` WHERE `permissions` LIKE '%new_update%'");
   while($administrator = mysql_fetch_array( $administrators, MYSQL_ASSOC )){
     $noti[] = $administrator['access_token'];
   }
