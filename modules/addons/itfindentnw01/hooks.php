@@ -156,7 +156,7 @@ if($AdminLogout === true):
 			'author' => 'ITFINDEN',
 			'name' => 'Termino de session'
 		);
-		processNotification($dataPacket);
+		sendTelegramMessage($dataPacket);
 	});
 endif;
 
@@ -174,7 +174,7 @@ if($AdminLogin === true):
 			'author' => 'ITFINDEN',
 			'name' => 'Inicio de session'
 		);
-		processNotification($dataPacket);
+		sendTelegramMessage($dataPacket);
 	});
 endif;
 
