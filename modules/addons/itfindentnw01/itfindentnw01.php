@@ -15,7 +15,7 @@ function itfindentnw01_config() {
 
     "fields" => array(
         "key" => array ("FriendlyName" => "Bot Token", "Type" => "text", "Size" => "50", "Description" => "Túnel de arranque recibido de Telegram Robot - <a href='http://itfinden.com/telegram-bot' target='_blank' style='color:#0000FF; text-decoration: none;'>Aprende a construir telegramas y recibir robots. Bot Token</a>", "Default" => "", ),
-        "chatid" => array ("FriendlyName" => "Chat ID", "Type" => "text", "Size" => "50", "Description" => "Entra en tu chat telegrama IP - <a href='http://itfinden.com/telegram-bot' target='_blank' style='color:#0000FF; text-decoration: none;'>Recibir entrenamiento Chat ID Telegrama</a>", "Default" => "", ),
+        "chatid" => array ("FriendlyName" => "Chat ID", "Type" => "text", "Size" => "50", "Description" => "Entra en tu chat telegrama IP - <a href='http://itfinden.com/telegram-bot' target='_blank' style='color:#0000FF; text-decoration: none;'>Recibir Notificaciones Chat ID Telegrama</a>", "Default" => "", ),
   ));    
     ));
     return $configarray;
