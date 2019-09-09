@@ -83,6 +83,14 @@ function itfindentnw01_output($vars) {
 	$result = mysql_fetch_array($access_token, MYSQL_ASSOC);
 	$permissions = unserialize($result['permissions']);
 
+	$modulos = [
+		["new_client", "Nuevos Clientes"],
+		["new_invoice", "Pagar Facturas"],
+		["new_ticket", "Nuevo Ticket"],
+		["new_update", "Nuevo Tickets Respuestas"],
+		["log", "Nuevo log "],
+	];
+
 	if (!mysql_num_rows($access_token)) {
 		echo "<p><a href='addonmodules.php?module=itfindentnw01&setup=1'>Configurar itfindentnw01</a></p>";
 	} else {
@@ -94,19 +102,19 @@ function itfindentnw01_output($vars) {
       <td class="fieldarea">
       <table width="100%">
         <tr>
-           <td valign="top">
-             <input type="checkbox" name="notification[new_client]" value="1" id="notifications_new_client" ' . ($permissions['new_client'] == "1" ? "checked" : "") . '> <label for="notifications_new_client">Nuevos Clientes</label><br>
-             <input type="checkbox" name="notification[new_invoice]" value="1" id="notifications_new_invoice" ' . ($permissions['new_invoice'] == "1" ? "checked" : "") . '> <label for="notifications_new_invoice">Pagar Facturas</label><br>
-             <input type="checkbox" name="notification[new_ticket]" value="1" id="notifications_new_ticket" ' . ($permissions['new_ticket'] == "1" ? "checked" : "") . '> <label for="notifications_new_ticket">Nuevo Ticket</label><br>
-             <input type="checkbox" name="notification[new_update]" value="1" id="notifications_new_update" ' . ($permissions['new_update'] == "1" ? "checked" : "") . '> <label for="notifications_new_update">Nuevo Tickets Respuestas</label><br>
-           </td>
+           <td valign="top">';
+
+		foreach ($modulos as $mod) {
+			echo '<input type="checkbox" name="notification[' . $mod[0] . ']" value="1" id="notifications_' . $mod[0] . '" ' . ($permissions[$mod[0]] == "1" ? "checked" : "") . '> <label for="notifications_' . $mod[0] . '">' . $mod[1] . '</label><br>';
+		}
+
+		echo '  </td>
          </tr>
 
     </table>
   </table>
 
-  <p align="center"><input type="submit" value="Grabar Cambios" class="button"></p></form>
-  ';
+  <p align="center"><input type="submit" value="Grabar Cambios" class="button"></p></form>';
 	}
 
 }
