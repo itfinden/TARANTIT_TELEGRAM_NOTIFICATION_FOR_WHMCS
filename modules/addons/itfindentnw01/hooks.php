@@ -37,11 +37,16 @@ function sendTelegramMessage($pm) {
 	$application_botkey = mysql_fetch_array( select_query('tbladdonmodules', 'value', array('module' => 'itfindentnw01', 'setting' => 'BotId') ), MYSQL_ASSOC );
 	$chat_id 		= $application_chatid['value'];
 	$botToken 		= $application_botkey['value'];
+	
+	$pm=var_export($pm,TRUE); 
+
 	$data = array(
 		'chat_id' 	=> $chat_id,
 		'text' 		=> PHP_EOL. $pm . PHP_EOL."-------------" . PHP_EOL. base64_decode("V0hNQ1MgSXRGaW5kZW4=")
 	);
     
+	
+
     itfinden_log($pm);
     
 	$curl = curl_init();
