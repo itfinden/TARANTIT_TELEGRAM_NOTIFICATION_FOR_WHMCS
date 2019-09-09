@@ -59,7 +59,7 @@ function sendTelegramMessage($pm) {
 
 	$data = array(
 		'chat_id' 	=> $chat_id,
-		'text' 		=> PHP_EOL. $pm . PHP_EOL."-------------" . PHP_EOL. base64_decode("V0hNQ1MgSXRGaW5kZW4=")
+		'text' 		=> PHP_EOL. $pm . PHP_EOL."-------------" . PHP_EOL. "itfindentnw01". PHP_EOL .base64_decode("V0hNQ1MgSXRGaW5kZW4=")
 	);
     
 
