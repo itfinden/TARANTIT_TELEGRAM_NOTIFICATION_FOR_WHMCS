@@ -3,7 +3,6 @@
 if (!defined("WHMCS")) {
 	die("This file cannot be accessed directly");
 }
-
 function itfindentnw01_config() {
 	$configarray = array(
 		"name" => "itfindentnw01 Telegram Notifications for WHMCS",
@@ -17,9 +16,9 @@ function itfindentnw01_config() {
 		"fields" => array(
 			"key" => array("FriendlyName" => "Itfinden Token", "Type" => "text", "Size" => "50", "Description" => "Token de ITFINDEN ", "Default" => "DEMO"),
 
-			"BotId" => array("FriendlyName" => "Bot ID", "Type" => "text", "Size" => "50", "Description" => "Bot Id Notificaciones de Telegram", "Default" => ""),
+			"BotId" => array("FriendlyName" => "Bot ID", "Type" => "text", "Size" => "50", "Description" => "Bot Id de Telegram", "Default" => ""),
 
-			"chatid" => array("FriendlyName" => "Chat ID", "Type" => "text", "Size" => "50", "Description" => "Entra en tu chat telegrama IP ", "Default" => ""),
+			"chatid" => array("FriendlyName" => "Chat ID", "Type" => "text", "Size" => "50", "Description" => "Ingresa el codifo de tu chat telegram ", "Default" => ""),
 
 		));
 	return $configarray;
