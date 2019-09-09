@@ -7,7 +7,7 @@ if (!defined("WHMCS")) {
 function itfindentnw01_config() {
 	$configarray = array(
 		"name" => "itfindentnw01 Telegram Notifications for WHMCS",
-		"description" => "Este huea lo cree yo",
+		"description" => "Este es un desarrollo de ITFINDEN CORP",
 		"version" => "1.0",
 		"author" => "Itfinden Corp",
 		"language" => "english",
@@ -15,11 +15,11 @@ function itfindentnw01_config() {
 		#"key" => array ("FriendlyName" => "ITFINDEN API", "Type" => "text", "Size" => "50", "Description" => "", "Default" => "", ),
 
 		"fields" => array(
-			"key" => array("FriendlyName" => "Bot Token", "Type" => "text", "Size" => "50", "Description" => "Túnel de arranque recibido de Telegram Robot - <a href='http://itfinden.com/telegram-bot' target='_blank' style='color:#0000FF; text-decoration: none;'>Aprende a construir telegramas y recibir robots. Bot Token</a>", "Default" => ""),
+			"key" => array("FriendlyName" => "Itfinden Token", "Type" => "text", "Size" => "50", "Description" => "Token de ITFINDEN ", "Default" => "DEMO"),
 
-			"chatid" => array("FriendlyName" => "Chat ID", "Type" => "text", "Size" => "50", "Description" => "Entra en tu chat telegrama IP - <a href='http://itfinden.com/telegram-bot' target='_blank' style='color:#0000FF; text-decoration: none;'>Recibir Notificaciones Chat ID Telegrama</a>", "Default" => ""),
+			"BotId" => array("FriendlyName" => "Bot ID", "Type" => "text", "Size" => "50", "Description" => "Bot Id Notificaciones de Telegram", "Default" => ""),
 
-			"BotId" => array("FriendlyName" => "Bot ID", "Type" => "text", "Size" => "50", "Description" => "Bot Id Notificaciones Telegrama", "Default" => ""),
+			"chatid" => array("FriendlyName" => "Chat ID", "Type" => "text", "Size" => "50", "Description" => "Entra en tu chat telegrama IP ", "Default" => ""),
 
 		));
 	return $configarray;
