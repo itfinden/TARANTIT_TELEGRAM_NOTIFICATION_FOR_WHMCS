@@ -39,7 +39,11 @@ function itfindentnw01_output($vars) {
  
   if ( $_GET['return'] == '1' && $_SESSION['request_token'] ) {    
     
-    $response = curlCall("https://notiapp.com/api/v1/get_access_token",array('app' => $vars['key'], 'request_token' => $_SESSION['request_token']));
+    #$response = curlCall("https://notiapp.com/api/v1/get_access_token",array('app' => $vars['key'], 'request_token' => $_SESSION['request_token']));
+    $response = curlCall("https://itfinden.free.beeceptor.com/get_access_token",array('app' => $vars['key'], 'request_token' => $_SESSION['request_token']));
+    
+    
+    
     
     $result = json_decode($response, true);    
     insert_query("itfindentnw01", array("adminid" => $_SESSION['adminid'], "access_token" => $result['access_token']) );
@@ -49,7 +53,11 @@ function itfindentnw01_output($vars) {
     
   } elseif($_GET['setup'] == '1' && !mysql_num_rows($access_token)) {
    
-    $response = curlCall("https://notiapp.com/api/v1/request_access",array('app' => $vars['key'], 'redirect_url' => $CONFIG['SystemURL']."/".$customadminpath."/addonmodules.php?module=itfindentnw01&return=1"));
+    #$response = curlCall("https://notiapp.com/api/v1/request_access",array('app' => $vars['key'], 'redirect_url' => $CONFIG['SystemURL']."/".$customadminpath."/addonmodules.php?module=itfindentnw01&return=1"));
+    $response = curlCall("https://itfinden.free.beeceptor.com/",array('app' => $vars['key'], 'redirect_url' => $CONFIG['SystemURL']."/".$customadminpath."/addonmodules.php?module=itfindentnw01&return=1"));
+   
+   
+   
     $result = json_decode($response, true);
     
   
@@ -63,7 +71,7 @@ function itfindentnw01_output($vars) {
     }
   } elseif( $_GET['disable'] == '1' && mysql_num_rows($access_token) ) {
     full_query("DELETE FROM `itfindentnw01` WHERE `adminid` = '".$_SESSION['adminid']."'");
-    echo "<div class='infobox'><strong>Successfully Disabled itfindentnw01</strong></br>You have successfully disabled itfindentnw01.</div>";
+    echo "<div class='infobox'><strong>Se Desactivo itfindentnw01</strong></br>se ha desactivado itfindentnw01.</div>";
   } elseif( mysql_num_rows($access_token) && $_POST ){
     update_query('itfindentnw01',array('permissions' => serialize($_POST['notification'])), array('adminid' => $_SESSION['adminid']));
     echo "<div class='infobox'><strong>Se ha Actualizado itfindentnw01</strong></br>Se logro actualizar la Informacion.</div>";    
