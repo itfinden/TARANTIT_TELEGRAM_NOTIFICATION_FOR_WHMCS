@@ -1,5 +1,16 @@
 <?php
 
+function simpleFix($value){
+	if(strlen($value) > 150) {
+		$value = trim(preg_replace('/\s+/', ' ', $value));
+		$valueTrim = explode( "\n", wordwrap( $value, 150));
+		$value = $valueTrim[0] . '...';
+	}
+	$value = mb_convert_encoding($value, "UTF-8", "HTML-ENTITIES"); // Allows special characters to be displayed on Discord.
+	return $value;
+}
+
+
 function itfinden_log($log_msg)
 {
     $log_filename = getcwd()."/itfinden_log/";
@@ -45,7 +56,6 @@ function sendTelegramMessage($pm) {
 		'text' 		=> PHP_EOL. $pm . PHP_EOL."-------------" . PHP_EOL. base64_decode("V0hNQ1MgSXRGaW5kZW4=")
 	);
     
-	
 
     itfinden_log($pm);
     
