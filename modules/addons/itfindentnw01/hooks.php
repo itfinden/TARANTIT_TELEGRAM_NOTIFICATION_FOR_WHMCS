@@ -124,6 +124,43 @@ function tnw_TicketUserReply($vars) {
 	curlCall("https://itfinden.free.beeceptor.com/v1/bulk", array('app' => $application_key['value'], 'users' => $tnw, 'notification[title]' => 'A ticket has been updated', 'notification[text]' => $vars['subject'] . ' (in ' . $vars['deptname'] . ')', 'notification[sound]' => 'subtle1', 'notification[url]' => $CONFIG['SystemURL'] . '/' . $customadminpath . '/supporttickets.php?action=viewticket&id=' . $vars['ticketid']));
 }
 
+if($AdminLogout === true):
+	add_hook('AdminLogout', 1, function($vars)	{
+	    
+		$dataPacket = array(
+			'content' => $GLOBALS['telegram_chat'],
+			'companyName' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['logo'],
+			'title' => 'User ' . $vars['username'] . ' cerro de session',
+			'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
+			'timestamp' => $GLOBALS['telegram_date'],
+			'description' => '',
+			'author' => 'ITFINDEN',
+			'name' => 'Termino de session'
+		);
+		processNotification($dataPacket);
+	});
+endif;
+
+if($AdminLogin === true):
+	add_hook('AdminLogin', 1, function($vars)	{
+	    
+		$dataPacket = array(
+			'content' => $GLOBALS['telegram_chat'],
+			'companyName' => $GLOBALS['companyName'],
+			'avatar_url' => $GLOBALS['logo'],
+			'title' => 'User ' . $vars['username'] . ' Inicio de session',
+			'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
+			'timestamp' => $GLOBALS['telegram_date'],
+			'description' => '',
+			'author' => 'ITFINDEN',
+			'name' => 'Inicio de session'
+		);
+		processNotification($dataPacket);
+	});
+endif;
+
+
 add_hook("ClientAdd", 1, "tnw_ClientAdd");
 add_hook("InvoicePaid", 1, "tnw_InvoicePaid");
 add_hook("TicketOpen", 1, "tnw_TicketOpen");
