@@ -46,7 +46,7 @@ function itfinden_dump($log_msg)
 {
     $log_filename = getcwd()."/itfindentnw01_dump/";
     
-    $log_msg=var_export($log_msg,TRUE) 
+    $log_msg=var_export($log_msg,TRUE);
 	
     if (!file_exists($log_filename)) 
     {
