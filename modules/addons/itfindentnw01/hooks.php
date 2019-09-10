@@ -182,7 +182,7 @@ function tnw_TicketUserReply($vars) {
 	
 	sendTelegramMessage($dataPacket);
 	
-	#curlCall("https://itfinden.free.beeceptor.com/v1/bulk", xx);
+	curlCall("https://itfinden.free.beeceptor.com/v1/bulk", xx);
 }
 
 if($AdminLogout === true):
