@@ -9,7 +9,7 @@ $GLOBALS['telegram_chat'] = "-360580051";
 #$GLOBALS['telegram_date'] = date(DateTime::ISO8601);
 $GLOBALS['telegram_date'] = date("d-m-Y H:i:s");
 $GLOBALS['telegram_url'] = "https://comunica.itfinden.com/commands/process";
-$GLOBALS['whmcsAdminURL'] = "https://xxcustomer.itfinden.com/gestion/";
+$GLOBALS['whmcsAdminURL'] = "https://customer.itfinden.com/gestion/";
 $GLOBALS['companyName'] = "ITFINDEN CORP";
 $GLOBALS['discordColor'] = hexdec("");
 $GLOBALS['logo'] = "";
@@ -46,7 +46,7 @@ function itfinden_dump($log_msg)
 {
     $log_filename = getcwd()."/itfindentnw01_dump/";
     
-    $log_msg=var_export($log_msg,TRUE) 
+    $log_msg=var_export($log_msg,TRUE) ;
 	
     if (!file_exists($log_filename)) 
     {
@@ -106,7 +106,18 @@ function tnw_ClientAdd($vars) {
 		$tnw[] = $administrator['access_token'];
 	}
 	$tnw = implode($tnw, ',');
-	curlCall("https://itfinden.free.beeceptor.com/v1/bulk", array('app' => $application_key['value'], 'users' => $tnw, 'notification[title]' => 'New WHMCS Client', 'notification[text]' => 'A new client has signed up!', 'notification[sound]' => 'fanfare', 'notification[url]' => $CONFIG['SystemURL'] . '/' . $customadminpath . '/clientssummary.php?userid=' . $vars['userid']));
+	
+	$dataPacket = array(
+	    'app' => $application_key['value'], 
+	    'users' => $tnw, 
+	    'notification[title]' => 'New WHMCS Client', 
+	    'notification[text]' => 'A new client has signed up!', 
+	    'notification[sound]' => 'fanfare', 
+	    'notification[url]' => $CONFIG['SystemURL'] . '/' . $customadminpath . '/clientssummary.php?userid=' . $vars['userid']);
+	
+	sendTelegramMessage($dataPacket);
+	
+	#curlCall("https://itfinden.free.beeceptor.com/v1/bulk", xx);
 }
 
 function tnw_InvoicePaid($vars) {
@@ -117,7 +128,18 @@ function tnw_InvoicePaid($vars) {
 		$tnw[] = $administrator['access_token'];
 	}
 	$tnw = implode($tnw, ',');
-	curlCall("https://itfinden.free.beeceptor.com/v1/bulk", array('app' => $application_key['value'], 'users' => $tnw, 'notification[title]' => 'An invoice has just been paid', 'notification[text]' => 'Invoice #' . $vars['invoiceid'] . ' has been paid.', 'notification[sound]' => 'cash', 'notification[url]' => $CONFIG['SystemURL'] . '/' . $customadminpath . '/invoices.php?action=edit&id=' . $vars['invoiceid']));
+	
+	$dataPacket =  array(  
+	    'app' => $application_key['value'], 
+	    'users' => $tnw, 
+	    'notification[title]' => 'An invoice has just been paid', 
+	    'notification[text]' => 'Invoice #' . $vars['invoiceid'] . ' has been paid.', 
+	    'notification[sound]' => 'cash', 
+	    'notification[url]' => $CONFIG['SystemURL'] . '/' . $customadminpath . '/invoices.php?action=edit&id=' . $vars['invoiceid']);
+	
+	sendTelegramMessage($dataPacket);
+	
+	#curlCall("https://itfinden.free.beeceptor.com/v1/bulk",x);
 }
 
 function tnw_TicketOpen($vars) {
@@ -128,7 +150,18 @@ function tnw_TicketOpen($vars) {
 		$tnw[] = $administrator['access_token'];
 	}
 	$tnw = implode($tnw, ',');
-	curlCall("https://itfinden.free.beeceptor.com/v1/bulk", array('app' => $application_key['value'], 'users' => $tnw, 'notification[title]' => 'A new ticket has arrived', 'notification[text]' => $vars['subject'] . ' (in ' . $vars['deptname'] . ')', 'notification[sound]' => 'subtle1', 'notification[url]' => $CONFIG['SystemURL'] . '/' . $customadminpath . '/supporttickets.php?action=viewticket&id=' . $vars['ticketid']));
+	
+	$dataPacket = array(
+	    'app' => $application_key['value'], 
+	    'users' => $tnw, 
+	    'notification[title]' => 'A new ticket has arrived', 
+	    'notification[text]' => $vars['subject'] . ' (in ' . $vars['deptname'] . ')', 
+	    'notification[sound]' => 'subtle1', 
+	    'notification[url]' => $CONFIG['SystemURL'] . '/' . $customadminpath . '/supporttickets.php?action=viewticket&id=' . $vars['ticketid']);
+	
+	sendTelegramMessage($dataPacket);
+	
+	#curlCall("https://itfinden.free.beeceptor.com/v1/bulk",x );
 }
 
 function tnw_TicketUserReply($vars) {
@@ -139,7 +172,17 @@ function tnw_TicketUserReply($vars) {
 		$tnw[] = $administrator['access_token'];
 	}
 	$tnw = implode($tnw, ',');
-	curlCall("https://itfinden.free.beeceptor.com/v1/bulk", array('app' => $application_key['value'], 'users' => $tnw, 'notification[title]' => 'A ticket has been updated', 'notification[text]' => $vars['subject'] . ' (in ' . $vars['deptname'] . ')', 'notification[sound]' => 'subtle1', 'notification[url]' => $CONFIG['SystemURL'] . '/' . $customadminpath . '/supporttickets.php?action=viewticket&id=' . $vars['ticketid']));
+	
+	$dataPacket = array(
+	    'app' => $application_key['value'], 
+	    'users' => $tnw, 'notification[title]' => 'A ticket has been updated', 
+	    'notification[text]' => $vars['subject'] . ' (in ' . $vars['deptname'] . ')', 
+	    'notification[sound]' => 'subtle1', 
+	    'notification[url]' => $CONFIG['SystemURL'] . '/' . $customadminpath . '/supporttickets.php?action=viewticket&id=' . $vars['ticketid']);
+	
+	sendTelegramMessage($dataPacket);
+	
+	#curlCall("https://itfinden.free.beeceptor.com/v1/bulk", xx);
 }
 
 if($AdminLogout === true):
