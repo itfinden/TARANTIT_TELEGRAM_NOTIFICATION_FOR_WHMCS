@@ -1,6 +1,6 @@
 <?php include 'lib/config.php';?>
 <?php include 'lib/function.php';?>
-
+<?php include 'lib/action.php';?>
 
 
 <?php
