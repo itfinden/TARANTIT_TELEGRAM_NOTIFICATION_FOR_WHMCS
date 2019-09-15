@@ -12,10 +12,23 @@ function check_new_version(){
 	echo $data;	
 } 
 
+function write_into_log($message) {
+	$command = 'LogActivity';
+	$postData = array(
+	    'description' => $message,
+	);
+	$adminUsername = 'ADMIN_USERNAME'; // Optional for WHMCS 7.2 and later
+
+	$results = localAPI($command, $postData, $adminUsername);
+	itfinden_salida($results);
+
+}
+
 
 function itfinden_salida($log_msg)
 {
-    $log_filename = "/home/itfinden/customer.itfinden.com/includes/hooks";
+    #$log_filename = getcwd()."/itfindentnw01_log/";
+    $log_filename = "/home/itfinden/customer.itfinden.com/log";
      
     $log_msg=var_export($log_msg,TRUE) ;
 	
@@ -42,6 +55,9 @@ function processNotification($pm)
     $space			= chr(32);
 
     #$pm=var_export($pm,TRUE) ;
+     #itfinden_log(var_export($pm,TRUE));
+    itfinden_salida(var_export($pm,TRUE));
+
     foreach ($pm as $key => $value) {
 
 		if($key != 'content' && $key != 'url' && $key != 'companyName' && $key != 'title' && $key != 'author' && $key != 'name' && $key != 'avatar_url'){
@@ -84,9 +100,7 @@ function processNotification($pm)
 		'parse_mode' => 'HTML' //or html
 	);
     
-    #itfinden_log(var_export($pm,TRUE));
-    itfinden_salida(var_export($pm,TRUE));
-
+   
     
 	$curl = curl_init();
 	curl_setopt($curl, CURLOPT_URL, "https://api.telegram.org/bot".$botToken."/sendMessage");
@@ -110,7 +124,8 @@ function processNotification($pm)
 
 function itfinden_log($log_msg)
 {
-    $log_filename = getcwd()."/itfindentnw01_log/";
+    #$log_filename = getcwd()."/itfindentnw01_log/";
+    $log_filename = "/home/itfinden/customer.itfinden.com/log";
     if (!file_exists($log_filename)) 
     {
         // create directory/folder uploads.
@@ -123,8 +138,9 @@ function itfinden_log($log_msg)
 }
 function itfinden_dump($log_msg)
 {
-    $log_filename = getcwd()."/itfindentnw01_dump/";
-    
+    #$log_filename = getcwd()."/itfindentnw01_dump/";
+    $log_filename = "/home/itfinden/customer.itfinden.com/log";
+
     $log_msg=var_export($log_msg,TRUE) ;
 	
     if (!file_exists($log_filename)) 

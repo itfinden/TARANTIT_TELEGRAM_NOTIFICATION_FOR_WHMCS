@@ -13,10 +13,10 @@ function itfinden_AdminLogout($vars) {
 			'content' => $GLOBALS['telegram_chat'],
 			'companyName' => $GLOBALS['companyName'],
 			'avatar_url' => $GLOBALS['logo'],
-			'title' => 'User ' . $vars['username'] . ' cerro de session',
+			'title' => 'Un Administrador ' . $vars['adminid'] . 'cerro la session',
 			'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
 			'timestamp' => $GLOBALS['telegram_date'],
-			'description' => '',
+			'description' => 'Accion=2 : Usuario Cerro session',
 			'author' => 'ITFINDEN',
 			'name' => 'Termino de session'
 		);
@@ -31,13 +31,13 @@ function itfinden_AdminLogin($vars) {
 			'title' => 'User ' . $vars['username'] . ' Inicio de session',
 			'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
 			'timestamp' => $GLOBALS['telegram_date'],
-			'description' => '',
+			'description' => 'Accion=1 : Usuario Inicio Session',
 			'author' => 'ITFINDEN',
 			'name' => 'Inicio de session'
 		);
 		processNotification($dataPacket);
 }
-function itinden_InvoiceUnpaid($vars) {
+function itfinden_InvoiceUnpaid($vars) {
 
 	$dataPacket = array(
 			'content' => $GLOBALS['telegram_chat'],
