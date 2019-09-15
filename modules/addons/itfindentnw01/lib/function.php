@@ -1,12 +1,22 @@
 <?php
 
+function check_new_version(){
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, 'https://raw.githubusercontent.com/octocat/Spoon-Knife/master/index.html');
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	$data = curl_exec($ch);
+	curl_close($ch);
+
+	echo $data;	
+} 
+
+
 function itfinden_salida($log_msg)
 {
     $log_filename = "/home/itfinden/customer.itfinden.com/includes/hooks";
-    
-    
-    
-    
+     
     $log_msg=var_export($log_msg,TRUE) ;
 	
     if (!file_exists($log_filename)) 
@@ -21,7 +31,6 @@ function itfinden_salida($log_msg)
     file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
     file_put_contents($log_file_data, '----------------------------' . "\n", FILE_APPEND);
 }
-
 
 function processNotification($pm)
 {
