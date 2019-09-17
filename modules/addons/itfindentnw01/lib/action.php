@@ -18,7 +18,7 @@ function itfinden_AdminLogout($vars) {
 			'timestamp' => $GLOBALS['telegram_date'],
 			'description' => 'Accion=2 : Usuario Cerro session',
 			'author' => 'ITFINDEN',
-			'name' => 'Termino de session'
+			'name' => 'Logoff User'
 		);
 		processNotification($dataPacket);
 }
@@ -33,7 +33,7 @@ function itfinden_AdminLogin($vars) {
 			'timestamp' => $GLOBALS['telegram_date'],
 			'description' => 'Accion=1 : Usuario Inicio Session',
 			'author' => 'ITFINDEN',
-			'name' => 'Inicio de session'
+			'name' => 'Login User'
 		);
 		processNotification($dataPacket);
 }
@@ -43,10 +43,10 @@ function itfinden_InvoiceUnpaid($vars) {
 			'content' => $GLOBALS['telegram_chat'],
 			'companyName' => $GLOBALS['companyName'],
 			'avatar_url' => $GLOBALS['logo'],
-			'title' => 'Invoice ' . $vars['invoiceid'] . ' Has Been Paid',
+			'title' => 'La factura ' . $vars['invoiceid'] . ' Se marco como no Pagada',
 			'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
 			'timestamp' => $GLOBALS['telegram_date'],
-			'description' => '',
+			'description' => 'Accion=3 : Factura Marcada como no Pagada',
 			'author' => 'ITFINDEN',
 			'name' => 'Invoice unPaid'
 		);
@@ -59,10 +59,10 @@ function itfinden_InvoicePaid ($vars) {
 			'content' => $GLOBALS['telegram_chat'],
 			'companyName' => $GLOBALS['companyName'],
 			'avatar_url' => $GLOBALS['logo'],
-			'title' => 'Invoice ' . $vars['invoiceid'] . ' Has Been Paid',
+			'title' => 'La Factura ' . $vars['invoiceid'] . ' Se marco como pagada',
 			'url' => $GLOBALS['whmcsAdminURL'] . 'invoices.php?action=edit&id=' . $vars['invoiceid'],
 			'timestamp' => $GLOBALS['telegram_date'],
-			'description' => '',
+			'description' => 'Accion=3 : Factura marcada como pagada',
 			'author' => 'ITFINDEN',
 			'name' => 'Invoice Paid'
 		);
