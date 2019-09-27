@@ -122,7 +122,6 @@ function processNotification($pm)
     
 }
 
-
 function itfinden_log($log_msg)
 {
     #$log_filename = getcwd()."/itfindentnw01_log/";
